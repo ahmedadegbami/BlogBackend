@@ -1,0 +1,49 @@
+[
+  {
+    "category": "kids",
+    "title": "Boys & Girls",
+    "cover": "ARTICLE COVER (IMAGE LINK)",
+    "author": { "name": "AUTHOR AVATAR NAME", "avatar": "AUTHOR AVATAR LINK" },
+    "content": "HTML",
+    "createdAt": "2022-05-11T14:52:59.277Z",
+    "_id": "fbqfupnxrl31pbcpa",
+    "readTime": { "value": 5, "unit": "minute" },
+    "comments": { "name": "Ade", "comments": "a nice blog" }
+  },
+  {
+    "category": "kids",
+    "title": "Boys & Girls",
+    "cover": "ARTICLE COVER (IMAGE LINK)",
+    "author": { "name": "AUTHOR AVATAR NAME", "avatar": "AUTHOR AVATAR LINK" },
+    "content": "HTML",
+    "createdAt": "2022-05-11T14:52:59.277Z",
+    "_id": "fbqfupnxrl31pbcpb",
+    "readTime": { "value": 5, "unit": "minute" },
+    "comments": [
+      {
+        "name": "Ade",
+        "comment": "I like the post",
+        "createdAt": "2022-05-12T14:17:11.155Z",
+        "id": "fbqfupwc2l333h5v8"
+      }
+    ]
+  },
+  {
+    "category": "kids",
+    "title": "Boys & Girls",
+    "cover": "ARTICLE COVER (IMAGE LINK)",
+    "author": { "name": "AUTHOR AVATAR NAME", "avatar": "AUTHOR AVATAR LINK" },
+    "content": "HTML",
+    "createdAt": "2022-05-11T14:52:59.277Z",
+    "_id": "fbqfupnxrl31pbcpc",
+    "readTime": { "value": 5, "unit": "minute" },
+    "comments": [
+      {
+        "name": "Shalawa",
+        "comment": "dont post again",
+        "createdAt": "2022-05-12T14:18:02.807Z",
+        "id": "fbqfupwc2l333i9pz"
+      }
+    ]
+  }
+]
