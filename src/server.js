@@ -10,17 +10,19 @@ import {
   unauthorizedErrorHandler,
 } from "./errorHandlers.js";
 import { join } from "path";
+import createError from "http-errors";
 
 const server = express();
 
 const publicFolderPath = join(process.cwd(), "./public");
 
 //This is for request body
-server.use(express.json());
-server.use(express.static(publicFolderPath));
 
 // ***** This is a middleware for interaction with front end *****
 
+const port = process.env.PORT || 3001;
+
+// const whitelist = [process.env.FE_DEV_URL, process.env.FE_PROD_URL];
 const whitelist = [process.env.FE_DEV_URL, process.env.FE_PROD_URL];
 
 const corsOptions = {
@@ -43,7 +45,9 @@ const corsOptions = {
   },
 };
 
+server.use(express.static(publicFolderPath));
 server.use(cors(corsOptions));
+server.use(express.json());
 
 // *********************** this are my ENDPOINTS ****************************
 
@@ -60,5 +64,5 @@ server.use(genericErrorHandler);
 console.table(listEndpoints(server));
 
 server.listen(3001, () => {
-  console.log("Server is running on port 3001");
+  console.log(`Server is running on port ${port}`);
 });
