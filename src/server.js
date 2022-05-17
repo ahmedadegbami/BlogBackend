@@ -63,6 +63,6 @@ server.use(genericErrorHandler);
 // ********** This an entension for instant console log of the server *************
 console.table(listEndpoints(server));
 
-server.listen(3001, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
