@@ -20,11 +20,30 @@ server.use(express.json());
 server.use(express.static(publicFolderPath));
 
 // ***** This is a middleware for interaction with front end *****
-// const corsOptions = {
-//   origin: "http://mywonderfulfrontend.com",
-// };
 
-// server.use(cors(corsOptions));
+const whitelist = [process.env.FE_DEV_URL, process.env.FE_PROD_URL];
+
+const corsOptions = {
+  origin: (origin, next) => {
+    // cors is a global middleware --> for each and every request we are going to be able to read the current origin value
+    console.log("CURRENT ORIGIN: ", origin);
+
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      // origin is in the whitelist --> move next with no errors
+      next(null, true);
+    } else {
+      // origin is NOT in the whitelist --> trigger an error
+      next(
+        createError(
+          400,
+          `Cors Error! your origin ${origin} is not in the list!`
+        )
+      );
+    }
+  },
+};
+
+server.use(cors(corsOptions));
 
 // *********************** this are my ENDPOINTS ****************************
 
