@@ -221,7 +221,7 @@ const cloudinaryUploader = multer({
     },
   }),
   fileFilter: (req, file, multerNext) => {
-    if (file.mimetype !== "image/gif") {
+    if (file.mimetype !== "image/gif" && file.mimetype !== "image/jpeg") {
       multerNext(createError(400, "Only GIF allowed!"));
     } else {
       multerNext(null, true);
