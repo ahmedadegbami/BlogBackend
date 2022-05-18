@@ -1,1 +1,32 @@
-[{"title":"The book of life","name":"Pauli","surname":"Ade","email":"paul@abcd.com","date of birth":"10-05-2020","createdAt":"2022-05-10T15:49:36.063Z","id":"fbqfupz4ul30bwb0h","avatar":"https://res.cloudinary.com/ahmedadegbami/image/upload/v1652859605/authors/image/asxma8dwkkmo5qkfeay1.gif"},{"title":"The way to code","name":"Ahmed","surname":"Adegbami","email":"paul@abcd.com","date of birth":"10-05-2720","createdAt":"2022-05-10T15:50:02.376Z","id":"fbqfupz4ul30bwvbc","avatar":"https://res.cloudinary.com/ahmedadegbami/image/upload/v1652881867/authors/image/t4mhpwmmehtqas4ziw7d.gif"},{"title":"keep fighting","name":"Paul","surname":"Ade","email":"paul@abcd.com","date of birth":"10-05-2020","createdAt":"2022-05-12T14:35:31.712Z","id":"fbqfupwyil3344r29","avatar":"https://res.cloudinary.com/ahmedadegbami/image/upload/v1652882255/authors/image/y4jfklxmdw0kinf15rin.gif"}]
+[
+  {
+    "title": "The book of life",
+    "name": "Pauli",
+    "surname": "Ade",
+    "email": "paul@abcd.com",
+    "date of birth": "10-05-2020",
+    "createdAt": "2022-05-10T15:49:36.063Z",
+    "id": "fbqfupz4ul30bwb0h",
+    "avatar": "https://res.cloudinary.com/ahmedadegbami/image/upload/v1652859605/authors/image/asxma8dwkkmo5qkfeay1.gif"
+  },
+  {
+    "title": "The way to code",
+    "name": "Ahmed",
+    "surname": "Adegbami",
+    "email": "paul@abcd.com",
+    "date of birth": "10-05-2720",
+    "createdAt": "2022-05-10T15:50:02.376Z",
+    "id": "fbqfupz4ul30bwvbc",
+    "avatar": "https://res.cloudinary.com/ahmedadegbami/image/upload/v1652881867/authors/image/t4mhpwmmehtqas4ziw7d.gif"
+  },
+  {
+    "title": "keep fighting",
+    "name": "Paul",
+    "surname": "Ade",
+    "email": "paul@abcd.com",
+    "date of birth": "10-05-2020",
+    "createdAt": "2022-05-12T14:35:31.712Z",
+    "id": "fbqfupwyil3344r29",
+    "avatar": "https://res.cloudinary.com/ahmedadegbami/image/upload/v1652882255/authors/image/y4jfklxmdw0kinf15rin.gif"
+  }
+]
