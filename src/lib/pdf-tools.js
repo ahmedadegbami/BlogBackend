@@ -1,4 +1,5 @@
 import PdfPrinter from "pdfmake";
+import fs from "fs";
 
 export const getAuthorssReadableStream = () => createReadStream(booksJSONPath);
 
@@ -11,7 +12,10 @@ export const getPDFReadableStream = (author) => {
   };
 
   const printer = new PdfPrinter(fonts);
-  const imageurl = author.avatar;
+
+  const avatar = fs.readFileSync(author.avatar);
+  const avatarBase64 = Buffer.from(avatar).toString("base64");
+
   const docDefinition = {
     content: [
       {
@@ -19,8 +23,12 @@ export const getPDFReadableStream = (author) => {
         style: "header",
       },
       {
-        image: imageurl,
+        image: avatarBase64,
+        width: 100,
+        height: 100,
+        alignment: "center",
       },
+
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam.\n\n",
       {
         text: author.category,
@@ -40,6 +48,7 @@ export const getPDFReadableStream = (author) => {
         style: ["quote", "small"],
       },
     ],
+
     styles: {
       header: {
         fontSize: 18,
