@@ -1,32 +1,36 @@
 import PdfPrinter from "pdfmake";
 import fs from "fs";
+import axios from "axios";
 
-export const getAuthorssReadableStream = () => createReadStream(booksJSONPath);
+const fonts = {
+  Roboto: {
+    normal: "Helvetica",
+    bold: "Helvetica-Bold",
+  },
+};
 
-export const getPDFReadableStream = (author) => {
-  const fonts = {
-    Roboto: {
-      normal: "Helvetica",
-      bold: "Helvetica-Bold",
-    },
-  };
+const printer = new PdfPrinter(fonts);
 
-  const printer = new PdfPrinter(fonts);
-
-  const avatar = fs.readFileSync(author.avatar);
-  const avatarBase64 = Buffer.from(avatar).toString("base64");
+export const getPDFReadableStream = async (author) => {
+  let imagePath = {};
+  if (author.avatar) {
+    const response = await axios.get(author.avatar, {
+      responseType: "arraybuffer",
+    });
+    const authorAvatarURLPaths = author.avatar.split("/");
+    const fileName = authorAvatarURLPaths[authorAvatarURLPaths.length - 1];
+    const [id, extension] = fileName.split(".");
+    const base64 = response.data.toString("base64");
+    const base64Image = `data:image/${extension};base64,${base64}`;
+    imagePath = { image: base64Image, width: 500, margin: [0, 0, 0, 40] };
+  }
 
   const docDefinition = {
     content: [
+      imagePath,
       {
         text: author.title,
         style: "header",
-      },
-      {
-        image: avatarBase64,
-        width: 100,
-        height: 100,
-        alignment: "center",
       },
 
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam.\n\n",

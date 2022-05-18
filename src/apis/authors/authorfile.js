@@ -21,7 +21,7 @@ authorFileRouter.get("/:authorId/pdf", async (req, res, next) => {
       throw new Error("Author not found");
     }
     const author = authors[foundauthor];
-    const source = getPDFReadableStream(author);
+    const source = await getPDFReadableStream(author);
 
     const destination = res;
 
