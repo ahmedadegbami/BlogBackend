@@ -1,6 +1,7 @@
 import express from "express";
 import authorsRouter from "./apis/authors/index.js";
 import blogPostsRouter from "./apis/blogPosts/index.js";
+import authorFileRouter from "./apis/authors/authorfile.js";
 import listEndpoints from "express-list-endpoints";
 import cors from "cors";
 import {
@@ -53,6 +54,7 @@ server.use(express.json());
 
 server.use("/authors", authorsRouter);
 server.use("/blogPosts", blogPostsRouter);
+server.use("/authorFile", authorFileRouter);
 
 // *************** This error handler must always be places after endpoints ********************
 server.use(badRequestErrorHandler);

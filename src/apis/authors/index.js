@@ -13,6 +13,7 @@ import createError from "http-errors";
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
+import { pipeline } from "stream";
 
 const authorPostsRouter = express.Router();
 // // 1. get the file and convert to path
