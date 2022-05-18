@@ -11,6 +11,8 @@ import {
 } from "../../lib/fs-tools.js";
 import createError from "http-errors";
 import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 const authorPostsRouter = express.Router();
 // // 1. get the file and convert to path
@@ -210,19 +212,26 @@ authorPostsRouter.put("/:authorId", async (req, res, next) => {
 //   res.send(updatedUser);
 // });
 
+const cloudinaryUploader = multer({
+  storage: new CloudinaryStorage({
+    cloudinary,
+    params: {
+      folder: "authors/image",
+    },
+  }),
+  fileFilter: (req, file, multerNext) => {
+    if (file.mimetype !== "image/gif") {
+      multerNext(createError(400, "Only GIF allowed!"));
+    } else {
+      multerNext(null, true);
+    }
+  },
+  // limits: { fileSize: 1 * 1024 * 1024 },
+}).single("avatar");
+
 authorPostsRouter.post(
   "/:authorId/avatar",
-  multer().single("avatar"),
-  // {
-  //   fileFilter: (req, file, multerNext) => {
-  //     if (file.mimetype !== "image/gif") {
-  //       multerNext(createError(400, "Only GIF allowed!"));
-  //     } else {
-  //       multerNext(null, true);
-  //     }
-  //   },
-  //   limits: { fileSize: 1 * 1024 },
-  // }
+  cloudinaryUploader,
   async (req, res, next) => {
     try {
       const authors = await readAuthors();
@@ -231,16 +240,16 @@ authorPostsRouter.post(
       );
 
       if (index !== -1) {
-        const url = await saveAuthorsAvatars(
-          req.file.originalname,
-          req.file.buffer
-        );
+        // const url = await saveAuthorsAvatars(
+        //   req.file.originalname,
+        //   req.file.buffer
+        // );
         const oldAuthor = authors[index];
-        const newAuthor = { ...oldAuthor, avatar: url };
+        const newAuthor = { ...oldAuthor, avatar: req.file.path };
         console.log(req.file);
         authors[index] = newAuthor;
         writeAuthors(authors);
-        res.send(newAuthor);
+        res.send();
       } else {
         next(
           createError(404, `Author with id ${req.params.authorId} not found`)
