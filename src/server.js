@@ -12,10 +12,15 @@ import {
 } from "./errorHandlers.js";
 import { join } from "path";
 import createError from "http-errors";
+import swaggerUIExpress from "swagger-ui-express";
+import yaml from "yamljs";
 
 const server = express();
 
 const publicFolderPath = join(process.cwd(), "./public");
+const yamlDocument = yaml.load(
+  join(process.cwd(), "./src/docs/apiDefinitions.yml")
+);
 
 //This is for request body
 
@@ -55,6 +60,11 @@ server.use(express.json());
 server.use("/authors", authorsRouter);
 server.use("/blogPosts", blogPostsRouter);
 server.use("/authorFile", authorFileRouter);
+server.use(
+  "/docs",
+  swaggerUIExpress.serve,
+  swaggerUIExpress.setup(yamlDocument)
+);
 
 // *************** This error handler must always be places after endpoints ********************
 server.use(badRequestErrorHandler);

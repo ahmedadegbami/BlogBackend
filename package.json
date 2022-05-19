@@ -29,7 +29,9 @@
     "multer-storage-cloudinary": "^4.0.0",
     "pdfmake": "^0.2.5",
     "stream": "^0.0.2",
+    "swagger-ui-express": "^4.4.0",
     "uniqid": "^5.4.0",
+    "yamljs": "^0.3.0",
     "zlib": "^1.0.5"
   },
   "devDependencies": {
