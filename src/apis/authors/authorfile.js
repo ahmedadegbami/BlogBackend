@@ -7,6 +7,8 @@ import {
 import { getPDFReadableStream } from "../../lib/pdf-tools.js";
 import { pipeline } from "stream";
 import { createGzip } from "zlib";
+import { getAuthorsReadableStream } from "../../lib/fs-tools.js";
+import json2csv from "json2csv";
 
 const authorFileRouter = express.Router();
 
@@ -26,6 +28,24 @@ authorFileRouter.get("/:authorId/pdf", async (req, res, next) => {
     const destination = res;
 
     pipeline(source, destination, (err) => {
+      if (err) console.log(err);
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+authorFileRouter.get("/authorsCSV", (req, res, next) => {
+  try {
+    res.setHeader("Content-Disposition", "attachment; filename=authors.csv");
+
+    const source = getAuthorsReadableStream();
+    const destination = res;
+    const transform = new json2csv.Transform({
+      fields: ["id", "title", "email"],
+    });
+
+    pipeline(source, transform, destination, (err) => {
       if (err) console.log(err);
     });
   } catch (error) {

@@ -13,6 +13,7 @@ import createError from "http-errors";
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
+import { sendRegistrationEmail } from "../../lib/email.js";
 
 const authorPostsRouter = express.Router();
 // // 1. get the file and convert to path
@@ -71,7 +72,12 @@ authorPostsRouter.post(
 
       authors.push(newAuthor);
       writeAuthors(authors);
-      res.send(newAuthor);
+
+      const { email } = req.body;
+
+      await sendRegistrationEmail(email);
+
+      res.send(newAuthor, { message: "User registered, email sent!" });
     } catch (error) {
       next(error);
     }

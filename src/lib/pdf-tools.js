@@ -1,6 +1,7 @@
 import PdfPrinter from "pdfmake";
 import fs from "fs";
 import axios from "axios";
+import imageToBase64 from "image-to-base64";
 
 const fonts = {
   Roboto: {
@@ -12,6 +13,14 @@ const fonts = {
 const printer = new PdfPrinter(fonts);
 
 export const getPDFReadableStream = async (author) => {
+  //   imageToBase64(author.avatar) // Path to the image
+  //     .then((response) => {
+  //       console.log(response); // "cGF0aC90by9maWxlLmpwZw=="
+  //     })
+  //     .catch((error) => {
+  //       console.log(error); // Logs an error if there was one
+  //     });
+
   let imagePath = {};
   if (author.avatar) {
     const response = await axios.get(author.avatar, {
@@ -22,16 +31,16 @@ export const getPDFReadableStream = async (author) => {
     const [id, extension] = fileName.split(".");
     const base64 = response.data.toString("base64");
     const base64Image = `data:image/${extension};base64,${base64}`;
-    imagePath = { image: base64Image, width: 200, margin: [0, 0, 0, 40] };
+    imagePath = { image: base64Image, width: 500, margin: [0, 0, 0, 40] };
   }
 
   const docDefinition = {
     content: [
-      imagePath,
       {
         text: author.title,
         style: "header",
       },
+      imagePath,
 
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Confectum ponit legam, perferendis nomine miserum, animi. Moveat nesciunt triari naturam.\n\n",
       {
