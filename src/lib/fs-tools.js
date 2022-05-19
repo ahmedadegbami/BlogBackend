@@ -25,3 +25,6 @@ export const saveAuthorsAvatars = (fileName, contentAsBuffer) => {
   const url = `http://localhost:3000${savedPath}`;
   return url;
 };
+
+export const getPDFsPath = (filename) =>
+  join(dataFolderPath, "./pdf", filename);

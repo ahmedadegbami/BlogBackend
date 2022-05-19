@@ -2,6 +2,9 @@ import PdfPrinter from "pdfmake";
 import fs from "fs";
 import axios from "axios";
 import imageToBase64 from "image-to-base64";
+import { getPDFsPath } from "./fs-tools.js";
+import { promisify } from "util";
+import { pipeline } from "stream";
 
 const fonts = {
   Roboto: {
@@ -83,6 +86,16 @@ export const getPDFReadableStream = async (author) => {
   const pdfReadableStream = printer.createPdfKitDocument(docDefinition, {});
   // OLD SYNTAX FOR PIPING pdfReadableStream.pipe(fs.createWriteStream("document.pdf"))
   pdfReadableStream.end();
-
   return pdfReadableStream;
+};
+
+export const generatePDFAsync = async (author) => {
+  const asyncPipeline = promisify(pipeline); // Promisify is a veeeeery cool function from 'util' core module, which transforms a function that uses callbacks (error-first callbacks) into a function that uses Promises instead (and so Async/Await). Pipeline is a function which works with error-first callbac --> I can promisify a pipeline, obtaining a "Promises-based pipeline"
+
+  const pdfReadableStream = getPDFReadableStream(author);
+
+  const path = getPDFsPath("test.pdf");
+
+  await asyncPipeline(pdfReadableStream, fs.createWriteStream(path));
+  return path;
 };

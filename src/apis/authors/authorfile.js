@@ -4,7 +4,7 @@ import {
   writeAuthors,
   saveAuthorsAvatars,
 } from "../../lib/fs-tools.js";
-import { getPDFReadableStream } from "../../lib/pdf-tools.js";
+import { getPDFReadableStream, generatePDFAsync } from "../../lib/pdf-tools.js";
 import { pipeline } from "stream";
 import { createGzip } from "zlib";
 import { getAuthorsReadableStream } from "../../lib/fs-tools.js";
@@ -48,6 +48,24 @@ authorFileRouter.get("/authorsCSV", (req, res, next) => {
     pipeline(source, transform, destination, (err) => {
       if (err) console.log(err);
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+authorFileRouter.get("/asyncPDF", async (req, res, next) => {
+  try {
+    const authors = await readAuthors();
+    // generate the pdf and save it on disk
+    const path = await generatePDFAsync(authors[0]);
+
+    // attach it to email
+    // await attachToEmail()
+    // send the email
+    // await sendEmail()
+    // optionally delete the file
+    // await deleteFile()
+    res.send(path);
   } catch (error) {
     next(error);
   }
