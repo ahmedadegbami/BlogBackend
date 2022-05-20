@@ -92,7 +92,7 @@ export const getPDFReadableStream = async (author) => {
 export const generatePDFAsync = async (author) => {
   const asyncPipeline = promisify(pipeline); // Promisify is a veeeeery cool function from 'util' core module, which transforms a function that uses callbacks (error-first callbacks) into a function that uses Promises instead (and so Async/Await). Pipeline is a function which works with error-first callbac --> I can promisify a pipeline, obtaining a "Promises-based pipeline"
 
-  const pdfReadableStream = getPDFReadableStream(author);
+  const pdfReadableStream = await getPDFReadableStream(author);
 
   const path = getPDFsPath("test.pdf");
 
