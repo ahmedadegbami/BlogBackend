@@ -246,10 +246,6 @@ authorPostsRouter.post(
       );
 
       if (index !== -1) {
-        // const url = await saveAuthorsAvatars(
-        //   req.file.originalname,
-        //   req.file.buffer
-        // );
         const oldAuthor = authors[index];
         const newAuthor = { ...oldAuthor, avatar: req.file.path };
         console.log(req.file);
