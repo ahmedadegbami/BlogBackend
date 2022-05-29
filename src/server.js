@@ -8,7 +8,7 @@ import {
   genericErrorHandler,
   notFoundErrorHandler,
   badRequestErrorHandler,
-  unauthorizedErrorHandler,
+  unauthorizedErrorHandler
 } from "./errorHandlers.js";
 import { join } from "path";
 import createError from "http-errors";
@@ -28,14 +28,12 @@ const yamlDocument = yaml.load(
 
 const port = process.env.PORT || 3001;
 
-// const whitelist = [process.env.FE_DEV_URL, process.env.FE_PROD_URL];
 const whitelist = [process.env.FE_DEV_URL, process.env.FE_PROD_URL];
 
 const corsOptions = {
   origin: (origin, next) => {
     // cors is a global middleware --> for each and every request we are going to be able to read the current origin value
     console.log("CURRENT ORIGIN: ", origin);
-    console.log("current", origin);
 
     if (!origin || whitelist.indexOf(origin) !== -1) {
       // origin is in the whitelist --> move next with no errors
@@ -49,7 +47,7 @@ const corsOptions = {
         )
       );
     }
-  },
+  }
 };
 
 server.use(express.static(publicFolderPath));

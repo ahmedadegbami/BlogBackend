@@ -2,7 +2,7 @@ import express from "express";
 import {
   readAuthors,
   writeAuthors,
-  saveAuthorsAvatars,
+  saveAuthorsAvatars
 } from "../../lib/fs-tools.js";
 import { getPDFReadableStream, generatePDFAsync } from "../../lib/pdf-tools.js";
 import { pipeline } from "stream";
@@ -42,7 +42,7 @@ authorFileRouter.get("/authorsCSV", (req, res, next) => {
     const source = getAuthorsReadableStream();
     const destination = res;
     const transform = new json2csv.Transform({
-      fields: ["id", "title", "email"],
+      fields: ["id", "title", "email"]
     });
 
     pipeline(source, transform, destination, (err) => {
@@ -55,17 +55,16 @@ authorFileRouter.get("/authorsCSV", (req, res, next) => {
 
 authorFileRouter.get("/asyncPDF", async (req, res, next) => {
   try {
+    res.setHeader("Content-Disposition", "attachment; filename=example.pdf");
+
     const authors = await readAuthors();
     // generate the pdf and save it on disk
-    const path = await generatePDFAsync(authors[0]);
+    const source = await getPDFReadableStream(authors[0]);
+    const destination = res;
 
-    // attach it to email
-    // await attachToEmail()
-    // send the email
-    // await sendEmail()
-    // optionally delete the file
-    // await deleteFile()
-    res.send(path);
+    pipeline(source, destination, (err) => {
+      if (err) console.log(err);
+    });
   } catch (error) {
     next(error);
   }

@@ -7,8 +7,10 @@ const { readJSON, writeJSON, writeFile, createReadStream } = fs;
 const dataFolderPath = join(dirname(fileURLToPath(import.meta.url)), "../data");
 const authorsFilePath = join(dataFolderPath, "authors.json");
 const blogsFilePath = join(dataFolderPath, "blogs.json");
-
 const authorsPublicFolderPath = join(process.cwd(), "./public/img/authors");
+
+export const pdfFilePath = join(dataFolderPath, "pdf/test.pdf");
+console.log("pdfFilePath:", pdfFilePath);
 
 export const readBlogs = () => readJSON(blogsFilePath);
 export const writeBlogs = (blogs) => writeJSON(blogsFilePath, blogs);

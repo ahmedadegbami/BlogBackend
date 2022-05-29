@@ -1,17 +1,36 @@
 import sgMail from "@sendgrid/mail";
+import fs from "fs";
+import { readFile } from "fs";
+import { pdfFilePath } from "./fs-tools.js";
 
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
-export const sendRegistrationEmail = async (recipientAddress) => {
-  // send email to recipient
+export const sendRegistrationEmail = async (recipientAddress, pdf) => {
+  fs.readFile(pdfFilePath, async (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      // const buffer = await streamToBuffer(pdf);
+      const attachment = data.toString("base64");
 
-  const msg = {
-    to: recipientAddress,
-    from: process.env.SENDER_EMAIL,
-    subject: "This is my first email with Sendgrid! Yeeeeeeeeeeee!",
-    text: "bla bla bla",
-    html: "<strong> bla bla bla in bold </strong>",
-  };
+      // send email to recipient
 
-  await sgMail.send(msg);
+      const msg = {
+        to: recipientAddress,
+        from: process.env.SENDER_EMAIL,
+        subject: "This is my first email with Sendgrid! Yeeeeeeeeeeee!",
+        text: "I am here to test the Sendgrid API",
+        html: "<strong>I am super proud of myself </strong>",
+        attachments: [
+          {
+            content: attachment,
+            filename: "test.pdf",
+            type: "application/pdf",
+            disposition: "attachment"
+          }
+        ]
+      };
+      await sgMail.send(msg);
+    }
+  });
 };

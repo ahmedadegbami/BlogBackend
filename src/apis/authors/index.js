@@ -7,7 +7,7 @@ import { response } from "express";
 import {
   readAuthors,
   writeAuthors,
-  saveAuthorsAvatars,
+  saveAuthorsAvatars
 } from "../../lib/fs-tools.js";
 import createError from "http-errors";
 import multer from "multer";
@@ -67,17 +67,18 @@ authorPostsRouter.post(
           `https://ui-avatars.com/api/name=` +
           req.body.name +
           "+" +
-          req.body.surname,
+          req.body.surname
       };
 
       authors.push(newAuthor);
       writeAuthors(authors);
+      res.send(newAuthor);
 
-      const { email } = req.body;
+      // const { email, id } = req.body;
 
-      await sendRegistrationEmail(email);
+      // await sendRegistrationEmail(email, id);
 
-      res.send(newAuthor, { message: "User registered, email sent!" });
+      // res.send({ message: "Author created successfully" });
     } catch (error) {
       next(error);
     }
@@ -222,8 +223,8 @@ const cloudinaryUploader = multer({
   storage: new CloudinaryStorage({
     cloudinary,
     params: {
-      folder: "authors/image",
-    },
+      folder: "authors/image"
+    }
   }),
   fileFilter: (req, file, multerNext) => {
     if (file.mimetype !== "image/gif" && file.mimetype !== "image/jpeg") {
@@ -231,7 +232,7 @@ const cloudinaryUploader = multer({
     } else {
       multerNext(null, true);
     }
-  },
+  }
   // limits: { fileSize: 1 * 1024 * 1024 },
 }).single("avatar");
 

@@ -1,32 +1,32 @@
 [
   {
-    "title": "The book of life",
-    "name": "Pauli",
-    "surname": "Ade",
-    "email": "paul@abcd.com",
-    "date of birth": "10-05-2020",
-    "createdAt": "2022-05-10T15:49:36.063Z",
-    "id": "fbqfupz4ul30bwb0h",
-    "avatar": "https://res.cloudinary.com/ahmedadegbami/image/upload/v1652906928/authors/image/gvgp36575hf9tpmgp0zq.jpg"
+    "title": "District",
+    "name": "Orville",
+    "surname": "Erdman",
+    "email": "builderadegbami@gmail.com",
+    "date of birth": "Mon May 23 2022 04:43:22 GMT+0200 (Central European Summer Time)",
+    "createdAt": "2022-05-29T12:23:18.812Z",
+    "id": "499cej713j0l3r9w7bx",
+    "avatar": "https://ui-avatars.com/api/name=Orville+Erdman"
   },
   {
-    "title": "The way to code",
-    "name": "Ahmed",
-    "surname": "Adegbami",
-    "email": "paul@abcd.com",
-    "date of birth": "10-05-2720",
-    "createdAt": "2022-05-10T15:50:02.376Z",
-    "id": "fbqfupz4ul30bwvbc",
-    "avatar": "https://res.cloudinary.com/ahmedadegbami/image/upload/v1652907034/authors/image/x3vmovq7pmoqhhpws1mn.jpg"
+    "title": "Island",
+    "name": "Karina",
+    "surname": "Schroeder",
+    "email": "builderadegbami@gmail.com",
+    "date of birth": "Sun Jun 27 2021 12:13:35 GMT+0200 (Central European Summer Time)",
+    "createdAt": "2022-05-29T12:23:24.710Z",
+    "id": "499cej713j0l3r9wbvq",
+    "avatar": "https://ui-avatars.com/api/name=Karina+Schroeder"
   },
   {
-    "title": "keep fighting",
-    "name": "Paul",
-    "surname": "Ade",
-    "email": "paul@abcd.com",
-    "date of birth": "10-05-2020",
-    "createdAt": "2022-05-12T14:35:31.712Z",
-    "id": "fbqfupwyil3344r29",
-    "avatar": "https://res.cloudinary.com/ahmedadegbami/image/upload/v1652907094/authors/image/g5odpjffonhkxbbh9lmu.jpg"
+    "title": "Refined",
+    "name": "Jeromy",
+    "surname": "Gerlach",
+    "email": "builderadegbami@gmail.com",
+    "date of birth": "Tue Oct 19 2021 08:32:12 GMT+0200 (Central European Summer Time)",
+    "createdAt": "2022-05-29T12:23:25.909Z",
+    "id": "499cej713j0l3r9wct1",
+    "avatar": "https://ui-avatars.com/api/name=Jeromy+Gerlach"
   }
 ]
